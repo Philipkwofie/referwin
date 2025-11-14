@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - referWin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+   
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="account.html">Account</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="ads.html">Watch Ads</a>
+      </div>
+    </div>
+     <h1>Your Dashboard</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="welcome-message">
+      <h1>Welcome back! 🚀</h1>
+      <p>Let's make some money together!</p>
+    </div>
+    <section id="activation" class="dashboard-card">
+      <div class="card-icon"><img src="icons/local_fire.png" alt="Account Status"></div>
+      <h2>Account Status</h2>
+      <p id="activationStatus">Loading...</p>
+      <p>Earnings: <span id="earnings">GHS 0</span></p>
+    </section>
+    <section id="withdrawals" class="dashboard-card">
+      <div class="card-icon"><img src="icons/attach_money.png" alt="Withdrawals"></div>
+      <h2>Withdrawals</h2>
+      <div id="withdrawalForm">
+        <input type="number" id="withdrawalAmount" placeholder="Amount in GHS" min="30" style="font-size: 1.5rem; padding: 1rem;">
+        <button id="withdrawBtn" style="font-size: 1.2rem; padding: 1rem 2rem;">Request Withdrawal</button>
+      </div>
+      <div id="withdrawalHistory">
+        <h3>Recent Withdrawal History</h3>
+        <ul id="withdrawalList"></ul>
+        <button id="viewFullWithdrawalHistory">View Full Withdrawal History</button>
+      </div>
+    </section>
+    <section id="stats" class="dashboard-card">
+      <div class="card-icon"><img src="icons/bar_chart.png" alt="Your Stats"></div>
+      <h2>Your Stats</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value" id="referred">0</span>
+          <span class="stat-label">Referred Users</span>
+        </div>
+      </div>
+    </section>
+    <section id="referral" class="dashboard-card">
+      <div class="card-icon">🔗</div>
+      <h2>Your Referral Link</h2>
+      <p id="referralLink">Loading...</p>
+      <button id="copyLink">Copy Link</button>
+    </section>
+    <section id="downlines" class="dashboard-card">
+      <div class="card-icon">👥</div>
+      <h2>Your Downlines</h2>
+      <div id="activatedDownlines">
+        <h3>Activated Users</h3>
+        <ul id="activatedList" style="max-height: 150px; overflow-y: auto;"></ul>
+      </div>
+      <div id="pendingDownlines">
+        <h3>Pending Activation</h3>
+        <ul id="pendingList"></ul>
+      </div>
+      <button id="viewFullDownlineHistory">View Full Downline History</button>
+    </section>
+  </main>
+
+
+
+  <script src="app.js"></script>
+</body>
+</html>

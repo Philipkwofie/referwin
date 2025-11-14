@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications - referWin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+   
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="account.html">Account</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="ads.html">Watch Ads</a>
+      </div>
+    </div>
+     <h1>Notifications</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section id="notifications-list">
+      <h2>Admin Notifications</h2>
+      <button id="toggleRecent">Toggle Recent Notifications</button>
+      <div id="notifications">
+        <!-- Notifications will be loaded here -->
+      </div>
+    </section>
+  </main>
+
+
+
+  <script src="app.js"></script>
+</body>
+</html>

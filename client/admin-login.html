@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - referWin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Admin Login</h1>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+  <main>
+    <form id="adminLoginForm">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required placeholder="Enter admin username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required placeholder="Enter admin password">
+        <div class="checkbox-group">
+          <input type="checkbox" id="showPassword">
+          <label for="showPassword">Show Password</label>
+        </div>
+      </div>
+      <button type="submit">Login</button>
+      <p><a href="login.html">User Login</a></p>
+    </form>
+  </main>
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          // Store the token in localStorage
+          localStorage.setItem('adminToken', data.token);
+          window.location.href = 'ads_mise-ye.html';
+        } else {
+          alert(data.error || 'Login failed');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('An error occurred during login');
+      }
+    });
+
+    // Show/Hide Password
+    document.getElementById('showPassword').addEventListener('change', (e) => {
+      const passwordField = document.getElementById('password');
+      passwordField.type = e.target.checked ? 'text' : 'password';
+    });
+  </script>
+</body>
+</html>

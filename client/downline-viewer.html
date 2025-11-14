@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downline Viewer - referWin</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-guard.js"></script> <!-- Add Auth Guard -->
+</head>
+<body>
+  <header>
+    
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+         <a href="ads_mise-ye.html">Dashboard</a>
+        <a href="broadcast-notification.html">Broadcast</a>
+        <a href="downline-viewer.html">Downline Viewer</a>
+        <a href="user-management.html">User Management</a>
+        <a href="ad-posting.html">Post Ad</a>
+       
+      </div>
+    </div>
+    <h1>Downline Viewer - referWin</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+  <main class="admin-main" style="padding-top: 20px;">
+    <div class="broadcast-container">
+      <section id="downline-viewer" class="broadcast-section">
+        <h2><img src="icons/bar_chart.png" alt="Group" style="width: 24px; height: 24px; margin-right: 8px;"> Downline Viewer</h2>
+        <div class="broadcast-card">
+          <div class="search-container">
+            <input type="text" id="downlineUserSearch" placeholder="Enter username to view downlines">
+            <button id="viewDownlinesBtn"><img src="icons/menu.png" alt="View" style="width: 16px; height: 16px; margin-right: 8px;"> View Downlines</button>
+          </div>
+          <div id="downlineResults"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="admin-common.js"></script>
+  <script src="downline-viewer.js"></script>
+</body>
+</html>

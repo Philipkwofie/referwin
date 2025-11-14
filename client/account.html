@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account - referWin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="account.html">Account</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="ads.html">Watch Ads</a>
+      </div>
+    </div>
+    <h1>My Account</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+
+  <main class="account-container">
+    <section id="account-info" class="account-info">
+      <div class="profile-avatar" id="profileAvatar"></div>
+      <div class="profile-name" id="profileName"></div>
+      <div class="profile-details">
+        <p><strong>Status</strong><br><span id="status"></span></p>
+        <p><strong>Signup Date</strong><br><span id="signupDate"></span></p>
+      </div>
+    </section>
+    <section id="account-settings" class="account-settings">
+      <h2>Account Settings</h2>
+      <button id="changePasswordBtn">Change Password</button>
+      <button id="logoutBtn">Logout</button>
+    </section>
+    <section id="withdrawal-history" class="withdrawal-history">
+      <h2>Full Withdrawal History</h2>
+      <button id="toggleWithdrawalHistory" class="toggle-btn">Show Withdrawal History</button>
+      <ul id="fullWithdrawalList" style="display: none;"></ul>
+    </section>
+    <section id="downline-history" class="downline-history">
+      <h2>Full Downline History</h2>
+      <button id="toggleDownlineHistory" class="toggle-btn">Show Downline History</button>
+      <div id="fullDownlineContent" style="display: none;">
+        <div id="fullActivatedDownlines">
+          <h3>Activated Users</h3>
+          <ul id="fullActivatedList"></ul>
+        </div>
+        <div id="fullPendingDownlines">
+          <h3>Pending Activation</h3>
+          <ul id="fullPendingList"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+  <script src="app.js"></script>
+</body>
+</html>

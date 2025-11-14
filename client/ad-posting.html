@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Posting Management - referWin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="ads_mise-ye.html">Dashboard</a>
+        <a href="broadcast-notification.html">Broadcast</a>
+        <a href="downline-viewer.html">Downline Viewer</a>
+        <a href="user-management.html">User Management</a>
+        <a href="ad-posting.html">Post Link</a>
+        
+      </div>
+    </div>
+    <h1>Link Posting Management - referWin</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+  <main class="admin-main" style="padding-top: 160px;">
+    <div class="broadcast-container">
+      <section id="create-ad-post" class="broadcast-section">
+        <h2><img src="icons/ads_click.png" alt="Ad" style="width: 24px; height: 24px; margin-right: 8px;"> Create Link Post</h2>
+        <div class="broadcast-card">
+          <div class="form-group">
+            <label for="adDay">Day:</label>
+            <select id="adDay" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px; margin-bottom: 15px;">
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adPlatform">Social Media Platform:</label>
+            <select id="adPlatform" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px; margin-bottom: 15px;">
+              <option value="youtube">YouTube (Reward: GHS 0.06)</option>
+              <option value="tiktok">TikTok (Reward: GHS 0.03)</option>
+              <option value="instagram">Instagram (Reward: GHS 0.02)</option>
+              <option value="facebook">Facebook (Reward: GHS 0.04)</option>
+              <option value="twitter">Twitter (Reward: GHS 0.01)</option>
+              <option value="other">Other (Reward: GHS 0.05)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adUrl">Link URL:</label>
+            <input type="url" id="adUrl" placeholder="https://example.com" style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px; margin-bottom: 15px;">
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="autoPost" checked> Enable Auto-Post (9 AM daily)
+            </label>
+          </div>
+          <button id="createAdPostBtn" class="modern-btn primary-btn"><img src="icons/add.png" alt="Create" style="width: 16px; height: 16px; margin-right: 8px;"> Create Link Post</button>
+        </div>
+      </section>
+
+      <section id="ad-posts-list" class="broadcast-section">
+        <h2><img src="icons/list.png" alt="List" style="width: 24px; height: 24px; margin-right: 8px;"> Link Posts</h2>
+        <div class="broadcast-card">
+          <div id="adPostsContainer">
+            <!-- Link posts will be loaded here -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="admin-common.js"></script>
+  <script src="ad-posting.js"></script>
+</body>
+</html>

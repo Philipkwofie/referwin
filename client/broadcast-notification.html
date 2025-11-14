@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast & Messages - referWin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="ads_mise-ye.html">Dashboard</a>
+        <a href="broadcast-notification.html">Broadcast</a>
+        <a href="downline-viewer.html">Downline Viewer</a>
+        <a href="user-management.html">User Management</a>
+        <a href="ad-posting.html">Post Ad</a>
+        
+      </div>
+    </div>
+    <h1>Broadcast & Messages - referWin</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+  <main class="admin-main" style="padding-top: 160px;">
+    <div class="broadcast-container">
+      <section id="send-notification" class="broadcast-section">
+        <h2><img src="icons/broadcast.png" alt="Broadcast" style="width: 24px; height: 24px; margin-right: 8px;"> Send Broadcast Notification</h2>
+        <div class="broadcast-card">
+          <textarea id="notificationMessage" placeholder="Enter notification message to send to all users..." style="width: 100%; min-height: 120px; padding: 15px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px; resize: vertical;"></textarea>
+          <button id="sendNotificationBtn" class="modern-btn primary-btn"><img src="icons/rocket_launch.png" alt="Send" style="width: 16px; height: 16px; margin-right: 8px;"> Send to All Users</button>
+        </div>
+      </section>
+
+      <section id="send-individual-message" class="broadcast-section">
+        <h2><img src="icons/chat.png" alt="Chat" style="width: 24px; height: 24px; margin-right: 8px;"> Send Individual Message</h2>
+        <div class="broadcast-card">
+          <input type="text" id="messageUserSearch" placeholder="Search users by username..." style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px; margin-bottom: 15px;">
+          <div id="messageUserList" class="user-list-modern" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px;"></div>
+          <textarea id="individualMessage" placeholder="Enter your personal message..." style="width: 100%; min-height: 100px; padding: 15px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px; resize: vertical; margin-bottom: 15px;"></textarea>
+          <button id="sendIndividualMessage" class="modern-btn success-btn"><img src="icons/sms.png" alt="Send" style="width: 16px; height: 16px; margin-right: 8px;"> Send Message</button>
+        </div>
+      </section>
+
+      <section id="message-management" class="broadcast-section">
+        <h2><img src="icons/sms.png" alt="SMS" style="width: 24px; height: 24px; margin-right: 8px;"> Message Management</h2>
+        <div class="broadcast-card">
+          <div class="message-stats" style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div class="stat-card">
+              <h3 id="totalMessages">0</h3>
+              <p>Total Messages</p>
+            </div>
+            <div class="stat-card">
+              <h3 id="recentMessagesCount">0</h3>
+              <p>Recent Messages</p>
+            </div>
+            <div class="stat-card">
+              <h3 id="oldMessagesCount">0</h3>
+              <p>Old Messages</p>
+            </div>
+          </div>
+          <div class="message-actions" style="display: flex; gap: 15px; margin-bottom: 20px;">
+            <button id="toggleMessagesView" class="modern-btn secondary-btn"><img src="icons/chat.png" alt="View" style="width: 16px; height: 16px; margin-right: 8px;"> View All Messages</button>
+            <button id="clearOldMessagesBtn" class="modern-btn danger-btn"><img src="icons/delete.png" alt="Clear" style="width: 16px; height: 16px; margin-right: 8px;"> Clear Old Messages</button>
+          </div>
+          <div id="messagesList" class="messages-container" style="display: none; max-height: 500px; overflow-y: auto; background: #f8f9fa; border-radius: 12px; padding: 15px;">
+            <h3 style="margin-top: 0; color: #333;"><img src="icons/chat.png" alt="Messages" style="width: 20px; height: 20px; margin-right: 8px;"> All Messages</h3>
+            <ul id="messages" class="messages-list"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="admin-common.js"></script>
+  <script src="broadcast-notification.js"></script>
+</body>
+</html>

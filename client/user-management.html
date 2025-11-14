@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management - referWin</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-guard.js"></script>
+</head>
+<body>
+  <header>
+    
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="ads_mise-ye.html">Dashboard</a>
+        <a href="broadcast-notification.html">Broadcast</a>
+        <a href="downline-viewer.html">Downline Viewer</a>
+        <a href="user-management.html">User Management</a>
+        <a href="ad-posting.html">Post Ad</a>
+        
+      </div>
+    </div>
+    <h1>User Management - referWin</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+  <main class="admin-main" style="padding-top: 20px;">
+    <div class="broadcast-container">
+      <section id="user-management" class="broadcast-section">
+        <h2><img src="icons/account_circle.png" alt="Manage" style="width: 24px; height: 24px; margin-right: 8px;"> User Management</h2>
+        <div class="broadcast-card">
+          <button id="manageUsersBtn" class="modern-btn primary-btn"><img src="icons/manage_search.png" alt="Manage" style="width: 16px; height: 16px; margin-right: 8px;"> Manage Users</button>
+        </div>
+      </section>
+      <section id="user-search" class="broadcast-section">
+        <h2><img src="icons/search.png" alt="Search" style="width: 24px; height: 24px; margin-right: 8px;"> User Search</h2>
+        <div class="broadcast-card">
+          <div class="search-container">
+            <input type="text" id="userSearchInput" placeholder="Search by username, email, or phone">
+            <button id="searchUsersBtn"><img src="icons/menu.png" alt="Search" style="width: 16px; height: 16px; margin-right: 8px;"> Search</button>
+            <button id="clearSearchBtn"><img src="icons/delete.png" alt="Clear" style="width: 16px; height: 16px; margin-right: 8px;"> Clear</button>
+          </div>
+          <div id="searchResults"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="admin-common.js"></script>
+  <script src="user-management.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ads Mise-ye - referWin</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-guard.js"></script> <!-- Add Auth Guard -->
+</head>
+<body>
+  <header>
+    
+    <div class="dropdown">
+      <button class="menu-btn">☰ Menu</button>
+      <div class="dropdown-content" id="navMenu">
+        <a href="ads_mise-ye.html">Dashboard</a>
+        <a href="broadcast-notification.html">Broadcast</a>
+        <a href="downline-viewer.html">Downline Viewer</a>
+        <a href="user-management.html">User Management</a>
+        <a href="ad-posting.html">Post Ad</a>
+        
+      </div>
+    </div>
+    <h1>Ads Mise-ye - referWin</h1>
+    <button id="logoutBtn" class="logout-btn"><img src="icons/logout.png" alt="Logout"></button>
+    <div class="header-buttons">
+      <button id="theme-toggle" class="theme-toggle-btn"><img src="icons/light_mode.png" alt="Toggle Theme"></button>
+    </div>
+  </header>
+  <main class="admin-main" style="padding-top: 160px;">
+
+    <section id="signup-stats">
+      <h2>Signup Statistics</h2>
+      <div id="signupChart">
+        <canvas id="statsChart" width="400" height="200"></canvas>
+      </div>
+      <div id="signupNumbers">
+        <p>Total Signups: <span id="totalSignups">0</span></p>
+        <p>Activated: <span id="activatedCount">0</span></p>
+        <p>Unactivated: <span id="unactivatedCount">0</span></p>
+      </div>
+    </section>
+    <section id="online-stats">
+      <h2>Online Users Statistics</h2>
+      <div id="onlineStats">
+        <p>Total Online: <span id="totalOnline">0</span></p>
+        <p>Activated Online: <span id="activatedOnline">0</span></p>
+        <p>Non-Activated Online: <span id="nonActivatedOnline">0</span></p>
+        <button id="toggleView">Toggle View</button>
+      </div>
+      <div id="onlineUsersList" style="display: none;">
+        <h3>Online Users</h3>
+        <ul id="onlineUsers"></ul>
+      </div>
+    </section>
+    <section id="user-list">
+      <h2>Users Pending Activation</h2>
+      <div id="users"></div>
+    </section>
+    <section id="withdrawals">
+      <h2>Pending Withdrawals</h2>
+      <p>Total Pending: <span id="pendingWithdrawalsCount">0</span></p>
+      <ul id="withdrawalList"></ul>
+      <button id="refreshWithdrawals">Refresh</button>
+    </section>
+    <section id="leaderboard">
+      <h2>Top Performers Leaderboard</h2>
+      <div id="leaderboardList"></div>
+      <button id="refreshLeaderboardBtn">Refresh Leaderboard</button>
+    </section>
+
+    <section id="whatsapp-settings">
+      <h2>Admin WhatsApp Number</h2>
+      <div id="whatsappDisplay">
+        <p>Current WhatsApp Number: <span id="currentWhatsapp">Loading...</span></p>
+      </div>
+      <div id="whatsappUpdate">
+        <input type="text" id="whatsappInput" placeholder="Enter WhatsApp link or number (e.g., +1234567890, NRR3SQ5MTSD3B1, or https://wa.me/message/...)" />
+        <button id="updateWhatsappBtn">Update WhatsApp Number</button>
+      </div>
+      <div id="whatsappMessage"></div>
+    </section>
+
+    <section id="admin-management" style="display: none;">
+      <h2>Admin Management</h2>
+      <div id="adminList">
+        <h3>Current Admins</h3>
+        <div id="adminsContainer"></div>
+      </div>
+      <div id="addAdminForm">
+        <h3>Add New Admin</h3>
+        <input type="text" id="newAdminUsername" placeholder="Username" />
+        <input type="password" id="newAdminPassword" placeholder="Password" />
+        <select id="newAdminRole">
+          <option value="admin">Admin</option>
+          <option value="master">Master</option>
+        </select>
+        <button id="addAdminBtn">Add Admin</button>
+        <div id="addAdminMessage"></div>
+      </div>
+    </section>
+
+  </main>
+  <script src="admin-common.js"></script>
+  <script src="ads_mise-ye.js"></script>
+</body>
+</html>
