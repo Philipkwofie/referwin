@@ -143,7 +143,7 @@ app.post('/api/signup', [
     // Log the user in immediately after signup
     req.session.userId = newUser._id;
 
-    res.status(201).json({ success: true, message: 'User created successfully', user: { id: newUser._id, username: newUser.username } });
+    res.status(201).json({ success: true, message: 'User created successfully', user: { id: newUser._id, username: newUser.username }, referralCode: newUser.referralCode });
   } catch (error) {
     console.error('Signup error:', error);
     res.status(500).json({ message: 'Server error during signup.' });
