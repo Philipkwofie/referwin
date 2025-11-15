@@ -775,9 +775,14 @@ app.get('/admin', requireAdminAuth, (req, res) => {
 db.connect(process.env.MONGO_URI)
   .then(() => {
     // Start the server only after a successful database connection
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
+    if (process.env.NODE_ENV === 'production') {
+      // Export for Vercel serverless functions
+      module.exports = app;
+    } else {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    }
   })
   .catch(err => {
     console.error('Failed to connect to the database. Server will not start.', err);
