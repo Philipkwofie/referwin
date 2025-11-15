@@ -56,7 +56,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+    scriptSrc: ["'self'", "'unsafe-inline'", "https://vercel.live"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:"],
       frameSrc: ["'self'", "https://www.youtube.com", "https://www.tiktok.com", "https://www.instagram.com", "https://youtube.com", "https://tiktok.com", "https://instagram.com"],
