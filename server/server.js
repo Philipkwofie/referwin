@@ -8,7 +8,6 @@ const envPath = path.resolve(__dirname, '../.env');
 // It's safe if the file doesn't exist; dotenv will just not load anything.
 require('dotenv').config({ path: envPath });
 
-console.log('Env vars loaded:', Object.keys(process.env).filter(k => k.startsWith('MONGO')).length);  // Debug: Should print 1
 const express = require('express');
 const https = require('https');
 const crypto = require('crypto');
@@ -35,6 +34,19 @@ const PORT = process.env.PORT || 3000;
 
 // Initialize database
 const db = new Database();
+
+// --- Vercel DB Connection Middleware ---
+// This middleware ensures the database is connected before any API route is handled.
+const connectToDb = async (req, res, next) => {
+  try {
+    await db.connect(process.env.MONGO_URI);
+    return next();
+  } catch (error) {
+    console.error('Database connection failed in middleware:', error);
+    return res.status(500).json({ message: 'Database connection error.' });
+  }
+};
+app.use('/api', connectToDb); // Apply middleware to all API routes
 
 // Trust proxy for rate limiting
 app.set('trust proxy', 1);
@@ -448,7 +460,7 @@ app.get('/api/admin/users', requireAdminAuth, async (req, res) => {
 // Admin - Get dashboard stats
 app.get('/api/admin/stats', requireAdminAuth, async (req, res) => {
   try {
-    const stats = await db.getStats(); // Corrected variable name from 'ts' to 'stats'
+    const stats = await db.getStats();
     res.json({
       totalSignups: stats.totalUsers,
       activated: stats.activatedUsers,
@@ -456,7 +468,7 @@ app.get('/api/admin/stats', requireAdminAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Error fetching admin stats:', error);
-    res.status(500).json({ error: 'Failed to fetch stats' }); // Completed the JSON response
+    res.status(500).json({ error: 'Failed to fetch stats' });
   }
 });
 
@@ -771,15 +783,12 @@ app.get('/admin', requireAdminAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/admin-login.html')); // Assuming admin page is admin-login.html or create a dashboard
 });
 
-// Connect to database and start server
-db.connect(process.env.MONGO_URI)
-  .then(() => {
-    // Start the server only after a successful database connection
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('Failed to connect to the database. Server will not start.', err);
-    process.exit(1); // Exit the process with an error code
+// --- Server Startup ---
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running locally on http://localhost:${PORT}`);
   });
+}
+
+// Export the app for Vercel
+module.exports = app;
