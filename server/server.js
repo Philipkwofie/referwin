@@ -80,16 +80,20 @@ app.use(limiter);
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' })); // Limit payload size
 app.use(express.static(path.join(__dirname, '../client')));
-
+ 
 // Session middleware
+const sessionStore = process.env.MONGO_URI
+  ? MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      collectionName: 'sessions'
+    })
+  : undefined;
+ 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production', // Use env var in production
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,
-    collectionName: 'sessions'
-  }),
+  store: sessionStore,
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Secure cookies in production
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
