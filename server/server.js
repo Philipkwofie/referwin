@@ -56,10 +56,10 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+    scriptSrc: ["'self'", "'unsafe-inline'", "https://vercel.live"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:"],
-      frameSrc: ["'self'", "https://www.youtube.com", "https://www.tiktok.com", "https://www.instagram.com", "https://youtube.com", "https://tiktok.com", "https://instagram.com"],
+      frameSrc: ["'self'", "https://www.youtube.com", "https://www.tiktok.com", "https://www.instagram.com", "https://youtube.com", "https://tiktok.com", "https://instagram.com", "https://vercel.live"],
       connectSrc: ["'self'", "http://localhost:3000"],
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],
@@ -80,16 +80,20 @@ app.use(limiter);
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '10mb' })); // Limit payload size
 app.use(express.static(path.join(__dirname, '../client')));
-
+ 
 // Session middleware
+const sessionStore = process.env.MONGO_URI
+  ? MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      collectionName: 'sessions'
+    })
+  : undefined;
+ 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production', // Use env var in production
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,
-    collectionName: 'sessions'
-  }),
+  store: sessionStore,
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Secure cookies in production
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
@@ -114,9 +118,13 @@ app.post('/api/signup', [
 
   try {
     const { username, email, password, phone, referralCode } = req.body;
-    const existingUser = await db.findUserByUsername(username) || await db.findUserByEmail(email);
-    if (existingUser) {
-      return res.status(409).json({ message: 'User with this username or email already exists.' });
+    const existingUsername = await db.findUserByUsername(username);
+    if (existingUsername) {
+      return res.status(409).json({ message: 'Username already exists.' });
+    }
+    const existingEmail = await db.findUserByEmail(email);
+    if (existingEmail) {
+      return res.status(409).json({ message: 'Email already exists.' });
     }
 
     // Only pass expected fields to prevent mass assignment
@@ -135,7 +143,7 @@ app.post('/api/signup', [
     // Log the user in immediately after signup
     req.session.userId = newUser._id;
 
-    res.status(201).json({ success: true, message: 'User created successfully', user: { id: newUser._id, username: newUser.username } });
+    res.status(201).json({ success: true, message: 'User created successfully', user: { id: newUser._id, username: newUser.username }, referralCode: newUser.referralCode });
   } catch (error) {
     console.error('Signup error:', error);
     res.status(500).json({ message: 'Server error during signup.' });
@@ -156,7 +164,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials.' });
     }
 
-    const isMatch = await db.verifyPassword(password, user.password);
+    const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid credentials.' });
     }

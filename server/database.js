@@ -58,8 +58,7 @@ class Database {
 
   // User operations
   async createUser(userData) {
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const user = await User.create({ ...userData, password: hashedPassword });
+    const user = await User.create(userData);
     return user;
   }
 
