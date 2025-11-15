@@ -118,9 +118,13 @@ app.post('/api/signup', [
 
   try {
     const { username, email, password, phone, referralCode } = req.body;
-    const existingUser = await db.findUserByUsername(username) || await db.findUserByEmail(email);
-    if (existingUser) {
-      return res.status(409).json({ message: 'User with this username or email already exists.' });
+    const existingUsername = await db.findUserByUsername(username);
+    if (existingUsername) {
+      return res.status(409).json({ message: 'Username already exists.' });
+    }
+    const existingEmail = await db.findUserByEmail(email);
+    if (existingEmail) {
+      return res.status(409).json({ message: 'Email already exists.' });
     }
 
     // Only pass expected fields to prevent mass assignment
