@@ -15,6 +15,12 @@ class Database {
   }
 
   async connect(uri = process.env.MONGO_URI) {
+    // In a serverless environment, we should reuse the connection if it's already open.
+    if (this.isConnected && mongoose.connection.readyState === 1) {
+      console.log('Using existing MongoDB connection.');
+      return;
+    }
+
     try {
       // Defensively check and clean the URI
       if (!uri || typeof uri !== 'string') {
